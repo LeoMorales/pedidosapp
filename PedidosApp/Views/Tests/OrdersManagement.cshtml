@@ -1,0 +1,197 @@
+﻿@model IEnumerable<PedidosApp.Models.OrderModel>
+
+@{
+    ViewBag.Title = "OrdersManagement";
+}
+
+<h2>Gestion de Pedidos</h2>
+
+<h3>Pedidos recibidos</h3>
+<table class="table">
+    <tr>
+        <th>
+            Identificador
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderRequestor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Design)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+
+    if (item.Status.ToString() == "Pending")
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderRequestor.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderUser.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Design)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        
+
+            <td>
+                @Html.ActionLink("Detalles", "OrderDetails", new { id = item.Id }) |
+                @Html.ActionLink("Aceptar", "AcceptOrder", new { id = item.Id }) |
+                @Html.ActionLink("Rechazar", "RefuseOrder", new { id = item.Id })
+            
+            
+            </td>
+        </tr>
+    }
+}
+
+</table>
+
+<h3>Pedidos aceptados</h3>
+<table class="table">
+    <tr>
+        <th>
+            Identificador
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderRequestor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Design)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        if ( (item.Status.ToString() == "Ready") ||  (item.Status.ToString() == "Printing"))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderRequestor.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderUser.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Design)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+
+
+                <td>
+                    @if (item.Status.ToString() == "Ready"){
+                        <text> @Html.ActionLink("Entregar", "DeliverOrder", new { id = item.Id }) | </text>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Finalizar", "FinishOrderPrinting", new { id = item.Id }) <text> | </text>
+                    }
+
+                    @Html.ActionLink("Detalles", "OrderDetails", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<h3>Pedidos entregados</h3>
+<table class="table">
+    <tr>
+        <th>
+            Identificador
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderRequestor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Design)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        if (item.Status.ToString() == "Delivered" )
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderRequestor.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderUser.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Design)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Detalles", "OrderDetails", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

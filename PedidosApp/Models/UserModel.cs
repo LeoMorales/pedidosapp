@@ -71,6 +71,12 @@ namespace PedidosApp.Models
         public double Lat { get; set; }
 
         public double Long { get; set; }
+
+        public string describe_yourself()
+        {
+            return Id + ", " + UserName + ", a cargo de " + ResponsableName;
+
+        }
     }
 
     public enum ProthesisType

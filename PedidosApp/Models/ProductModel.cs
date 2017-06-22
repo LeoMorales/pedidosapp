@@ -28,6 +28,12 @@ namespace PedidosApp.Models
         //public int Version { get; set; }
 
         //public virtual ICollection<FileModel> Files { get; set; }
+
+        public string describe_yourself()
+        {
+            return Id + ", " + Name + ", " + Type + ", " + Thumbnail;
+            
+        }
     }
 
     public enum ProductType

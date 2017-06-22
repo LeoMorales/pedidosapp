@@ -37,10 +37,13 @@ namespace PedidosApp.Models
     {
         [Description("Pendiente")]
         Pending,
+        [Description("Imprimiendo")]
+        Printing,
         [Description("Lista para retirar")]
         Ready,
         [Description("Entregada")]
         Delivered,
+        //Se agrego un estado 'imprimiendo'
     }
 
     public static class AttributesHelperExtension
